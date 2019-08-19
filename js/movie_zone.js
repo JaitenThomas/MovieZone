@@ -1,3 +1,12 @@
+/*Use onload event to load the page with random cars
+*/
+window.addEventListener("load", function(){
+    makeAjaxGetRequest('movie_zone_main.php', 'cmd_movie_select_all', null, updateContent);
+	//show the top navigation panel
+	document.getElementById('id_topnav').style.display = "none";
+});
+
+
 function movieShowAllClick(){
 	document.getElementById('id_topnav').style.display = "none";
 	document.getElementById('id_content').innerHTML = "";
