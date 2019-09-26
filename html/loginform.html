@@ -1,0 +1,49 @@
+
+
+
+
+<form method="POST" name="loginform">
+  
+  
+
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input type="text" placeholder="Enter Username" name="username" required>
+  
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+  
+      <button type="button" onclick="submitRequest()">Login</button>
+      <label>
+        <input type="checkbox" checked="checked" name="remember"> Remember me
+      </label>
+
+    </div>
+  
+    
+    
+  </form> 
+
+  <script>
+    function submitRequest() {
+      var formData = new FormData(document.loginform);
+
+    
+
+      //console.log(document.joinform['surname'].value);
+      makeAjaxPostRequest('movie_zone_main.php','cmd_member_login', formData, success, true, false);
+      //handle the server response.ot
+      function success(data) 
+      {
+        //console.log(data);
+        if (data == '_OK_') 
+        { 
+          
+        } 
+        else {
+          document.getElementById("Error").innerHTML = data;
+        }
+      }
+    }
+
+  </script>

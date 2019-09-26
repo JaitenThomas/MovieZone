@@ -1,0 +1,188 @@
+
+<form method="post" id="joinform" name="joinform">
+  <fieldset>
+    <legend>Name</legend>
+    <div> 
+      <label>Surname:</label>
+      <input type="text" name="surname" id="surname" size = "50" maxlength = "50">
+      <span class = "requiredmarker">*</span>
+    </div>
+    <label>Other names:</label>
+    <input type="text" name="other_name" id="other_name" size = "50" maxlength = "60" >
+      <span class = "requiredmarker">*</span>
+  </fieldset>
+
+  <fieldset id="preferredcontact">
+    <legend>Preferred Contact Method:</legend>
+    Mobile phone:
+    
+    <input type="hidden" name="contact_method" id="contact_method" value="email">
+
+    <input type="radio" name="contactMobile" id="contactMobile" value="mobile" onclick="contactChange(event)">
+    &nbsp;&nbsp;Landline phone:
+    
+    <input type="radio" name="contactLandline" id="contactLandline" value="landline" onclick="contactChange(event)">
+    &nbsp;&nbsp;Email:
+    
+    <input type="radio" name="contactEmail" id="contactEmail" checked="checked" value="email"  onclick="contactChange(event)">
+
+    <div class="popup" id = "contacthelp">
+      <p>Please select your preferred contact method.</p>
+    </div>
+
+  </fieldset>
+
+  <fieldset id="formcontact">
+    <legend>Contact details</legend>
+    <div id ="mobilerow">
+      <label>Mobile:</label>
+      <input type="text" name="mobile" id="mobile" size = "13" maxlength = "12"/>
+      <span class = "requiredmarker" id = "mobilemarker">*</span>
+      <div class="popup" id = "mobilehelp">
+        Enter mobile number in following:<br>
+        0[4 or 5]XX XXX XXX where X is a digit
+      </div>                           
+    </div>
+
+    <div id ="phonerow">
+      <label>Landline:</label>
+      <input type="text" name="landline" id="landline" size = "13" maxlength = "13" />
+      <span class = "requiredmarker" id = "landlinemarker">*</span>  
+      <div class="popup" id = "phonehelp">
+        Enter phone number in following format:<br>
+        (0[2,3,6,7,8 or 9]) XXXXXXXX where X is a digit
+      </div>                               
+      </div>
+      <div id ="emailrow">
+      <label>Email:</label>
+      <input type="email" name="email" id="email" size = "50" maxlength = "50"/>
+      <span class = "requiredmarker" id = "emailmarker">*</span>                             
+      <div class="popup" id = "emailhelp">
+        Please enter valid email address
+      </div>                               
+    </div>
+  </fieldset>
+
+  <script type = "text/javascript">
+    //turn off visibility of mobile and Landline (as email checked)
+    mobilemarker.style.visibility = "hidden";
+    landlinemarker.style.visibility = "hidden";
+    emailmarker.style.visibility = "visible";
+  </script>
+
+  <fieldset id="occupationlist">
+    <legend>Choose Your Occupation</legend>
+    <label>Occupation:</label>
+    <select name="occupation" id="occupation">
+      <option value="blank"></option>                        
+      <option value="Student">Student</option>
+      <option value="Manager">Manager</option>
+      <option value="Healthcare">Medical worker</option>
+      <option value="Trades">Trades worker</option>
+      <option value="Educator">Education</option>
+      <option value="Technician">Technician</option>
+      <option value="Clerical">Clerical worker</option>
+      <option value="Retail">Retail worker</option>
+      <option value="Researcher">Researcher</option>
+      <option value="Other">Other</option>
+    </select>
+    <span class = "requiredmarker">*</span>                        
+  </fieldset>
+
+  <fieldset id="formaddress">
+    <legend>Address:</legend>
+    <div id = "checkboxrow">
+
+        <input type="hidden" name="magazine" id="magazine" value="0"/>
+        <input type="checkbox" onclick="magazineChange(event)"/>
+    Do you want to receive our monthly magazine?<br><br>
+    </div>   
+    <div id ="streetrow">
+      <label>Street address:</label>
+      <input type="text" name="street" id="street" size = "50" maxlength = "50"/>
+      <span class = "requiredmarker" id = "streetmarker">*</span>                              
+      <div class="popup" id = "streethelp">
+          Please enter house number and street address
+      </div>                                  
+      </div>
+      <div id ="suburbrow">
+      <label>Suburb and State:</label>
+      <input type="text" name="suburb" id="state" size = "50" maxlength = "50"/>
+      <span class = "requiredmarker" id = "suburbmarker">*</span>
+      <div class="popup" id = "suburbhelp">
+          Please enter suburb and state separated by comma:<br>
+          Suburb, State
+      </div>                                  
+      </div>                     
+      <div id ="postcoderow">
+      <label>Postcode:</label>
+      <input type="text" name="postcode" id="postcode" size = "4" maxlength = "4"/>
+      <span class = "requiredmarker" id = "postcodemarker">*</span>                              
+      <div class="popup" id = "postcodehelp">
+          Please enter postcode maximum 4 digits
+      </div>                                  
+    </div>                                             
+  </fieldset>        
+
+  <fieldset id="usernameFieldset"><legend>Username and Password:</legend>
+    <div id ="usernamerow">
+    <label>Username:</label>
+    <input type="text" name="username" id="username" size = "14" maxlength = "10"/>
+    <span class = "requiredmarker">*</span>                           
+    <div class="popup" id = "usernamehelp">
+      Please enter username<br>minimum 6 characters - maximum 10 characters
+    </div>                               
+    </div>
+    <div id ="passwordrow">
+    <label>Password:</label>
+    <input type="password" name="password" id="password" size = "15" maxlength = "10"/>
+    <span class = "requiredmarker">*</span>                           
+    <div class="popup" id = "passwordhelp">
+      10 characters maximum containing at minimum<br>one uppercase letter,<br>
+      one lowercase letter,<br>one number and<br>one special character<br> 
+      with no whitespace allowed
+    </div>                               
+  </div>                     
+  <div id ="verifypassrow">
+    <label>Verify password:</label>
+    <input type="password" name="verifypass" id="verifypass" size = "15" maxlength = "40"/>
+    <span class = "requiredmarker">*</span>                           
+    <div class="popup" id = "verifypasshelp">
+      <p>Enter password again for verification</p>
+    </div>                               
+  </div>      
+  </fieldset>         
+  
+  <div id="id_error"></div>
+
+    <div id="formbuttons">
+      <input type="button" name="submit" id="submit" onclick="validateForm();" value="Join the DVD Emporium Now"/>&nbsp;&nbsp;
+      <input type="reset" />
+    </div>
+
+  
+</form>
+
+<script>
+    //simply goes back to the bv caryard index file index.php
+    function create_member_btnCancelClicked() {
+              
+      //window.location.replace('../moviezone/index.php');
+    }
+    //send ajax request to ask for server-side authentication
+    function create_member_btnOKClicked() {
+
+              
+      // var formData = new FormData(document.joinform);
+
+      // formData.set("magazine", document.getElementById("magazine").value);
+
+     
+
+  
+
+      
+      //console.log(document.joinform['surname'].value);
+     
+    }
+  </script>

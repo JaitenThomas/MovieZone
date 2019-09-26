@@ -42,9 +42,17 @@ class MovieZoneModel {
     /*
         Return an error if there is one.
     */
-
     public function getError(){
         return $this->error;
+    }
+
+    public function selectUser($userData){
+        $this->dbAdapter->dbOpen();
+        $result = $this->dbAdapter->userSelect($userData);
+        $this->dbAdapter->dbClose();
+        $this->error= $this->dbAdapter->lastError();
+
+        return $result;
     }
 
     public function selectAllMovies () {
@@ -56,9 +64,27 @@ class MovieZoneModel {
         return $result;
     }
 
+    public function selectAllMovieActors(){
+        $this->dbAdapter->dbOpen();
+        $result = $this->dbAdapter->movieSelectAllActors();
+        $this->dbAdapter->dbClose();
+        $this->error= $this->dbAdapter->lastError();
+
+        return $result;
+    }
+
     public function selectMoviesNewReleases () {
         $this->dbAdapter->dbOpen();
-        $result = $this->dbAdapter->movieSelectNewReleases();
+        $result = $this->dbAdapter->movieSelectNewReleases(6);
+        $this->dbAdapter->dbClose();
+        $this->error= $this->dbAdapter->lastError();
+
+        return $result;
+    }
+
+    public function selectMoviesLeftNavNewReleases() {
+        $this->dbAdapter->dbOpen();
+        $result = $this->dbAdapter->movieSelectNewReleases(2);
         $this->dbAdapter->dbClose();
         $this->error= $this->dbAdapter->lastError();
 
@@ -86,6 +112,16 @@ class MovieZoneModel {
 		return $result;
     }	
 
+    public function createMember($memberdata) {
+
+		$this->dbAdapter->dbOpen();
+		$result = $this->dbAdapter->insertMemberData($memberdata);
+		$this->dbAdapter->dbClose();
+		$this->error = $this->dbAdapter->lastError();
+		
+		return $result;
+    }
+
 
 
     public function selectAllDirectors() {
@@ -108,7 +144,6 @@ class MovieZoneModel {
 		
 		return $result;
     }	
-
 
     public function selectAllGenres() {
         $this->dbAdapter->dbOpen();
@@ -151,6 +186,25 @@ class MovieZoneModel {
 		
 		return $result;
     }	
+
+    public function decreaseRentalAmount ($id) {
+        $this->dbAdapter->dbOpen();
+		$this->dbAdapter->movieAmountDecrease($id);
+		$this->dbAdapter->dbClose();
+		$this->error = $this->dbAdapter->lastError();
+		
+		//return $result;
+    }
+
+    public function selectMovieById($id){
+        $this->dbAdapter->dbOpen();
+		$result = $this->dbAdapter->movieWithId($id);
+		$this->dbAdapter->dbClose();
+        $this->error = $this->dbAdapter->lastError();
+        
+        return $result;
+    }
+
 }
 
 ?>

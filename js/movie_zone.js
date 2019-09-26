@@ -6,6 +6,17 @@ window.addEventListener("load", function(){
 	document.getElementById('id_topnav').style.display = "none";
 });
 
+function SendUserToLogin () {
+	location.href = 'login.php';
+}
+
+function LogOutUser(){
+	
+	location.href = 'logout_user.php';
+	//location.href = 'index.php';
+
+}
+
 
 function movieShowAllClick(){
 	document.getElementById('id_topnav').style.display = "none";
@@ -29,6 +40,9 @@ function movieActorButtonClick(){
 
 function movieActorFilterSearchClick() {
 	var actor = document.getElementById('id_actor').value;
+
+
+
 	var params = '';
 	
 	if (actor != 'all'){
@@ -88,9 +102,7 @@ function movieClassificationButtonClick(){
 
 function movieClassificationFilterSearchClick() {
 	var classification = document.getElementById('id_classification').value;
-	console.log(classification);
 	var params = '';
-
 	
 	if (classification != 'all'){
 		params += '&classification=' + classification;
@@ -112,4 +124,63 @@ function updateTopNav (data) {
 	var topnav = document.getElementById('id_topnav');
 	topnav.innerHTML = data;
 	topnav.style.display = "inherit";
+}
+
+
+function addMovieToCheckOut ($id, $count) {
+
+	
+
+
+	var params = '';
+
+	if($id != null){
+		params += '&id=' + $id;
+	}
+
+	//Make an ajax request to reduce the movie rental amount;
+	makeAjaxPostRequest('movie_zone_main.php','cmd_decrease_movie_rental_amount', params, success, false, false);
+	function success(data) 
+      {       
+
+			
+			makeGetMovieByIdRequest($id);
+		
+			if($count >= 4)
+			{
+				document.location = "booking.php";
+			}
+			else 
+			{
+				document.location.reload();
+			}
+			
+			console.log(data);
+        
+            
+		} 
+      }
+
+	//console.log('add movied ' + $movie_id);
+
+
+
+function makeGetMovieByIdRequest ($movie_id) {
+
+
+	var params = '';
+
+	if($movie_id != null){
+		params += '&id=' + $movie_id;
+	}
+	
+
+	makeAjaxGetRequest('movie_zone_main.php','cmd_movie_select_by_id', params, updateContent, false);
+
+
+
+}
+
+function SendUserToCheckOut(){
+	location.href = 'booking.php';
 }
